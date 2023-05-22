@@ -122,4 +122,16 @@ class Tree
 
     inorder_array
   end
+
+  def preorder(current_node = root, preorder_array = [], &block)
+    return if current_node.nil?
+
+    block.call current_node if block_given?
+    preorder_array << current_node.data
+
+    preorder(current_node.left_node, preorder_array, &block)
+    preorder(current_node.right_node, preorder_array, &block)
+
+    preorder_array
+  end
 end
