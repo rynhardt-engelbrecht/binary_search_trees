@@ -94,4 +94,19 @@ class Tree
       find(data, current_node.left_node) if data < current_node.data
     end
   end
+
+  def level_order(node = root)
+    return if node.nil?
+
+    queue = []
+    queue << node
+
+    until queue.empty?
+      current = queue.shift
+      yield current
+
+      queue << current.left_node if current.left_node
+      queue << current.right_node if current.right_node
+    end
+  end
 end
