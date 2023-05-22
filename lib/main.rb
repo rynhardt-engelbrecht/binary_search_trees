@@ -159,4 +159,16 @@ class Tree
 
     [left_height, right_height].max + 1
   end
+
+  def depth(node, current_depth)
+    return 0 if node == current_node
+
+    if node.data > current_node.data
+      node_depth = depth(node, current_node.right_node)
+    elsif node.data < current_node.data
+      node_depth = depth(node, current_node.left_node)
+    end
+
+    node_depth + 1
+  end
 end
