@@ -150,4 +150,13 @@ class Tree
 
     postorder_array
   end
+
+  def height(node)
+    return 0 if node.nil?
+
+    left_height = height(node.left_node)
+    right_height = height(node.right_node)
+
+    [left_height, right_height].max + 1
+  end
 end
