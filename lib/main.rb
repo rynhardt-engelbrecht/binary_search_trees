@@ -20,7 +20,7 @@ class Tree
   def build_tree(array)
     return nil if array.empty?
 
-    if root == nil
+    if self.root == nil
       array.uniq!
       array.sort!
     end
@@ -178,5 +178,11 @@ class Tree
     return true if (left_height - right_height) <= 1 && balanced?(node.left_node) == true && balanced?(node.right_node)
 
     return false
+  end
+
+  def rebalance
+    tree_array = level_order
+    self.root = nil
+    self.build_tree(tree_array)
   end
 end
