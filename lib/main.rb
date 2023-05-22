@@ -42,10 +42,14 @@ class Tree
   end
 
   def insert(data, current_node = root)
-    return nil if data == current_node.data
+    unless current_node.nil?
+      return nil if data == current_node.data
+    end
     new_node = Node.new(data)
 
-    if data > current_node.data
+    if root.nil?
+      return self.root = new_node
+    elsif data > current_node.data
       return current_node.right_node = new_node if current_node.right_node == nil
 
       insert(data, current_node.right_node)
