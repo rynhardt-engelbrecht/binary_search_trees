@@ -42,6 +42,7 @@ class Tree
   end
 
   def insert(data, current_node = root)
+    return nil if data == current_node.data
     new_node = Node.new(data)
 
     if data > current_node.data
@@ -82,4 +83,6 @@ class Tree
     node = node.left_node until node.left_node.nil?
     node
   end
+
+  def find; end
 end
