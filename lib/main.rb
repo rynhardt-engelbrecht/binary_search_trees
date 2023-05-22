@@ -154,13 +154,10 @@ class Tree
   def height(node)
     return 0 if node.nil?
 
-    left_height = height(node.left_node)
-    right_height = height(node.right_node)
-
-    [left_height, right_height].max + 1
+    [height(node.left_node), height(node.right_node)].max + 1
   end
 
-  def depth(node, current_depth)
+  def depth(node)
     return 0 if node == current_node
 
     if node.data > current_node.data
@@ -170,5 +167,16 @@ class Tree
     end
 
     node_depth + 1
+  end
+
+  def balanced?(node = root)
+    return true if node.nil?
+
+    left_height = height(node.left_node)
+    right_height = height(node.right_node)
+
+    return true if (left_height - right_height) <= 1 && balanced?(node.left_node) == true && balanced?(node.right_node)
+
+    return false
   end
 end
