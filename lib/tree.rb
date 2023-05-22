@@ -78,9 +78,9 @@ class Tree
     left_height = height(node.left_node)
     right_height = height(node.right_node)
 
-    return true if (left_height - right_height) <= 1 && balanced?(node.left_node) == true && balanced?(node.right_node)
+    height_difference = (left_height - right_height).abs
 
-    false
+    height_difference <= 1 && balanced?(node.left_node) == true && balanced?(node.right_node)
   end
 
   def rebalance
