@@ -95,19 +95,23 @@ class Tree
     end
   end
 
-  def level_order(node = root)
+  def level_order(node = root, &block)
     return if node.nil?
 
     queue = []
+    level_order_array = []
     queue << node
 
     until queue.empty?
       current = queue.shift
-      yield current
+      block.call current if block_given?
+      level_order_array << current.data
 
       queue << current.left_node if current.left_node
       queue << current.right_node if current.right_node
     end
+
+    level_order_array
   end
 
   def inorder(current_node = root, inorder_array = [], &block)
