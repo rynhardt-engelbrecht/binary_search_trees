@@ -54,4 +54,32 @@ class Tree
       insert(data, current_node.left_node)
     end
   end
+
+  def delete(data, current_node = root)
+    return current_node if current_node.nil?
+    return nil if current_node.right_node.nil? && current_node.left_node.nil?
+
+    if data > current_node.data
+      current_node.right_node = delete(data, current_node.right_node)
+    elsif data < current_node.data
+      current_node.left_node = delete(data, current_node.left_node)
+    else
+      if current_node.left_node.nil?
+        return current_node.right_node
+      elsif current_node.right_node.nil?
+        return current_node.left_node
+      end
+
+      successor = find_successor(current_node.right_node)
+      current_node.data = successor.data
+      current_node.right_node = delete(successor.data, current_node.right_node)
+    end
+
+    current_node
+  end
+
+  def find_successor(node)
+    node = node.left_node until node.left_node.nil?
+    node
+  end
 end
