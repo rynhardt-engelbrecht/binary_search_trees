@@ -9,9 +9,9 @@ class Node
     @right_node = nil
   end
 
-  # def <=>(other_node)
-  #   self.data <=> other_node.data
-  # end
+  def <=>(other_node)
+    self.data <=> other_node.data if other_node
+  end
 end
 
 class Tree
@@ -108,5 +108,18 @@ class Tree
       queue << current.left_node if current.left_node
       queue << current.right_node if current.right_node
     end
+  end
+
+  def inorder(current_node = root, inorder_array = [], &block)
+    return if current_node.nil?
+
+    inorder(current_node.left_node, inorder_array, &block)
+
+    block.call current_node if block_given?
+    inorder_array << current_node.data
+
+    inorder(current_node.right_node, inorder_array, &block)
+
+    inorder_array
   end
 end
