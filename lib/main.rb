@@ -134,4 +134,16 @@ class Tree
 
     preorder_array
   end
+
+  def postorder(current_node = root, postorder_array = [], &block)
+    return if current_node.nil?
+
+    postorder(current_node.left_node, postorder_array, &block)
+    postorder(current_node.right_node, postorder_array, &block)
+
+    block.call current_node if block_given?
+    postorder_array << current_node.data
+
+    postorder_array
+  end
 end
