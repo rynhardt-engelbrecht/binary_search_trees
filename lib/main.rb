@@ -13,3 +13,7 @@ class Node
     self.data <=> other_node.data
   end
 end
+
+class Tree
+  attr_accessor :root
+end
